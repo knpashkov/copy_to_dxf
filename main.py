@@ -19,6 +19,11 @@ def main():
 
     # Создаём группу и помещаем её в буфер обмена
     drawing_selection = drawing_2d1.SelectionManager
+    for item in drawing_selection.SelectedObjects:
+        if not hasattr(item, 'Style'):
+            drawing_selection.Unselect(item)
+        elif item.Style != 1:
+            drawing_selection.Unselect(item)
     drawing_group = drawing_2d1.DrawingGroups.Add(True, 'copy')
     drawing_group.AddObjects(drawing_selection.SelectedObjects)
     drawing_group.WriteToClip(False, False)
